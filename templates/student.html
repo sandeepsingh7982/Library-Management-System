@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block user %}
+<li class="nav-item fst-italic px-lg-3 py-3 py-lg-4">WELCOME {{d['user_name']}}</li>
+<li class="nav-item fst-italic"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
+{% endblock %}
+{% block content %}
+<!-- Page Header-->
+<div class="container-fluid px-0" style="margin-bottom: 10px;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{url_for('static',filename='assets/img/photo2.jpg')}}" style="max-width:100%; height: 560px;" class="d-block w-100" alt="...">
+          </div>
+        </div>
+      </div>
+</div>
+<!-- Main Content-->
+<div class="container">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th scope="col">STUDENT ID</th>
+                <th scope="col">STUDENT NAME</th>
+                <th scope="col">ISSUE BOOKS</th>
+                <th scope="col">RETURN BOOKS</th>
+                <th scope="col">ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in s %}
+            <tr>
+
+                <td>{{data[0]}}</td>
+                <td>{{data[1]}}</td>
+                <td>{{data[2]}}</td>
+                <td>{{data[3]}}</td>
+                <td><a href="/deletebystudentid/{{data[0]}}"type="button" class="btn btn-success mx-1">DELETE</button>
+                    <a href="/update"type="button" class="btn btn-danger mx-1">UPDATE</button>
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
