@@ -155,8 +155,21 @@ def deletebystudentid(sno):
     else:
         return redirect('/')
 
-@app.route('/update',methods=['GET','POST'])
-def updatestudentdetail():
+@app.route('/update/<int:s_i>')
+def pushdetails(s_i):
+    if 'user_id' in session:
+        with sql.connect('library.db') as conn:
+            cursor=conn.cursor()
+            query='select * from issue_books where student_id=?'
+            cursor.execute(query,(s_i,))
+            data=cursor.fetchall()
+            print(data)
+        return render_template('update.html',s=data,d=session)
+    else:
+        return redirect('/')
+
+@app.route('/update/<int:s>',methods=['GET','POST'])
+def updatestudentdetail(s):
     if 'user_id' in session:
         if request.method=='POST':
             data=dict(request.form)
@@ -165,7 +178,7 @@ def updatestudentdetail():
             temp.append(values[1]) 
             temp.append(values[2]) 
             temp.append(values[3]) 
-            temp.append(values[0]) 
+            temp.append(s) 
             query='''UPDATE issue_books
                     SET student_name=?,
                     books=?,
@@ -175,8 +188,7 @@ def updatestudentdetail():
                 cursor=conn.cursor()
                 cursor.execute(query,temp)
                 conn.commit()
-                return render_template('update.html')
-        return render_template('update.html')
+        return redirect('/student')
     else:
         return redirect('/')
 
