@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block user %}
-<li class="nav-item fst-italic px-lg-3 py-3 py-lg-4">WELCOME {{s['user_name']}}</li>
+<li class="nav-item fst-italic px-lg-3 py-3 py-lg-4">WELCOME {{d['user_name']}}</li>
 <li class="nav-item fst-italic"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
 {% endblock %}
 {% block content %}
@@ -18,18 +18,18 @@
 </div>
 <h1>ISSUE BOOKS</h1>
 <div class="container">
-    <form method="POST" ,action="{{url_for('updatestudentdetail')}}">
+    <form method="POST" ,action="/update/s[0][0]">
         <div class="mb-3">
             <label  class="form-label">STUDENT ID</label>
-            <input type="number" class="form-control" name="student_id",id="student_id" required>
+            <input type="number" class="form-control" name="student_id",id="student_id" value="{{s[0][0]}}" required>
         </div>
         <div class="mb-3">
             <label  class="form-label">STUDENT NAME</label>
-            <input type="text" class="form-control" name="student_name",id="STUDENT NAME" required>
+            <input type="text" class="form-control" name="student_name",id="STUDENT NAME" value="{{s[0][1]}}" required>
         </div>
         <div class="mb-3">
             <label  class="form-label">BOOKS</label>
-            <input type="text" class="form-control" name="books" id="books"> 
+            <input type="text" class="form-control" name="books" value="{{s[0][2]}}" id="books"> 
         </div>
         <div class="mb-3">
             <label  class="form-label">RETURN BOOKS</label>
