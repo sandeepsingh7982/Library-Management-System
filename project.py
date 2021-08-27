@@ -128,8 +128,8 @@ def issue():
                 query=f'INSERT INTO issue_books(student_id,student_name,books,return_books) values(?,?,?,?)'
                 cursor.execute(query,values)
                 conn.commit()
-            return render_template('issue.html')
-        return render_template('issue.html')
+            return render_template('issue.html',s=session)
+        return render_template('issue.html',s=session)
     else:
         return redirect('/')
     
